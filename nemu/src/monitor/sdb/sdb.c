@@ -79,9 +79,11 @@ static int cmd_x(char *args){
   if(expression2!=NULL)sscanf(expression2,"%lx",&addr);
   uint64_t step=numm>0 ? 4 : -4;
   numm=numm>0 ? numm : -numm;
+  long int numm_T=0;
   for(;numm>0;numm--){
-    printf(ANSI_FMT("0x%lx: ", ANSI_FG_BLUE), addr+numm*step);
+    printf(ANSI_FMT("0x%lx: ", ANSI_FG_BLUE), addr+numm_T*step);
     printf("0x%10x\r\n",paddr_read(addr+numm*step,4));
+    numm_T++;
   }
   return 0;
 }

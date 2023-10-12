@@ -80,7 +80,8 @@ static int cmd_x(char *args){
   uint64_t step=numm>0 ? 4 : -4;
   numm=numm>0 ? numm : -numm;
   for(;numm>0;numm--){
-    printf("0x%08x\r\n",paddr_read(addr+numm*step,4));
+    printf(ANSI_FMT("0x%lx: ", ANSI_FG_BLUE), addr);
+    printf("0x%10x\r\n",paddr_read(addr+numm*step,4));
   }
   return 0;
 }

@@ -71,7 +71,7 @@ static int cmd_info(char *args){
 
 static int cmd_x(char *args){
 char *expression=strtok(NULL," ");
-char *expression2=strtok(NULL,"x");
+char *expression2=strtok(NULL,"0x");
 uint64_t numm=1;
 if(expression!=NULL)numm=atoll(expression);
 uint64_t addr=1;

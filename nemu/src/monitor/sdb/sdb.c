@@ -70,15 +70,13 @@ static int cmd_info(char *args){
 }
 
 static int cmd_x(char *args){
-char *expression1=strtok(NULL," ");
-if(*expression1=='r')isa_reg_display();
-//char *expression1=strtok(expression," ");
-//char *expression2=strtok(NULL,"x");
-//uint64_t numm=1;
-//if(expression1!=NULL)numm=atoll(expression1);
-//uint64_t addr=1;
-//if(expression2!=NULL)addr=strtoll(expression2,NULL,16);
-//if (addr!=0)printf("%s","RIGHT");
+char *expression=strtok(NULL," ");
+char *expression2=strtok(NULL,"x");
+uint64_t numm=1;
+if(expression!=NULL)numm=atoll(expression);
+uint64_t addr=1;
+if(expression2!=NULL)addr=strtoll(expression2,NULL,16);
+if(addr!=0)printf("%ld%ld",numm,addr);
   return 0;
 }
 

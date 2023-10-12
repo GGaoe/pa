@@ -63,8 +63,9 @@ static int cmd_si(char *args){
   return 0;
 }
 
-static int cmd_info_r(char *args){
-  isa_reg_display();
+static int cmd_info(char *args){
+  char *expression=strtok(NULL," ");
+  if(*expression=='r')isa_reg_display();
   return 0;
 }
 
@@ -77,7 +78,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   {"si","Single Step Execute",cmd_si},
-  {"info r","Information of the reg",cmd_info_r},
+  {"info","Information",cmd_info},
   /* TODO: Add more commands */
 
 };

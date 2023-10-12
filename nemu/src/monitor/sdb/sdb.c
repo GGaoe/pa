@@ -81,7 +81,7 @@ static int cmd_x(char *args){
   numm=numm>0 ? numm : -numm;
   long int numm_T=0;
   for(;numm>0;numm--){
-    printf(ANSI_FMT("0x%lx:    ",ANSI_FG_BLUE), addr+numm_T*step);
+    printf("0x%lx:    ", addr+numm_T*step);
     printf("0x%-10x\r\n",paddr_read(addr+numm*step,4));
     numm_T++;
   }

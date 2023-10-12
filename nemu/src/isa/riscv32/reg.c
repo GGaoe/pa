@@ -24,6 +24,10 @@ const char *regs[] = {
 };
 
 void isa_reg_display() {
+  for(int tmp=0;tmp<=31;tmp++){
+      printf("-20%s-20%X-20%u",regs[tmp],cpu.gpr[tmp],cpu.gpr[tmp]);
+  }
+  return;
 }
 
 word_t isa_reg_str2val(const char *s, bool *success) {

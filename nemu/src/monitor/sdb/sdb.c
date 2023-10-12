@@ -75,8 +75,8 @@ char *expression2=strtok(NULL,"0x");
 uint64_t numm=1;
 if(expression!=NULL)numm=atoll(expression);
 uint64_t addr=1;
-if(expression2!=NULL)addr=strtoll(expression2,NULL,16);
-if(addr!=0)printf("%ld%ld",numm,addr);
+if(expression2!=NULL)sscanf(expression2,"%lx",&addr);
+if(addr!=0)printf("%ld  %ld",numm,addr);
   return 0;
 }
 

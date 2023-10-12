@@ -74,14 +74,14 @@ static int cmd_x(char *args){
   char *expression=strtok(NULL," ");
   char *expression2=strtok(NULL," ");
   long int numm=1;
-  if(expression!=NULL)numm=atol(expression);
+  if(expression!=NULL)sscanf(expression,"%ld",&numm);
   uint64_t addr=1;
   if(expression2!=NULL)sscanf(expression2,"%lx",&addr);
   uint64_t step=numm>0 ? 4 : -4;
   numm=numm>0 ? numm : -numm;
   long int numm_T=0;
   for(;numm>0;numm--){
-    printf(ANSI_FMT("0x%lx: ", ANSI_FG_BLUE), addr+numm_T*step);
+    printf(ANSI_FMT("0x%lx:    ",ANSI_FG_BLUE), addr+numm_T*step);
     printf("0x%-10x\r\n",paddr_read(addr+numm*step,4));
     numm_T++;
   }

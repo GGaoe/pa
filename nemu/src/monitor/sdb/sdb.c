@@ -73,8 +73,8 @@ static int cmd_info(char *args){
 static int cmd_x(char *args){
   char *expression=strtok(NULL," ");
   char *expression2=strtok(NULL," ");
-  uint64_t numm=1;
-  if(expression!=NULL)numm=atoll(expression);
+  long int numm=1;
+  if(expression!=NULL)numm=atol(expression);
   uint64_t addr=1;
   if(expression2!=NULL)sscanf(expression2,"%lx",&addr);
   uint64_t step=numm>0 ? 4 : -4;

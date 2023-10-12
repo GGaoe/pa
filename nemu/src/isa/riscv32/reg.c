@@ -25,7 +25,7 @@ const char *regs[] = {
 
 void isa_reg_display() {
   for(int tmp=0;tmp<=31;tmp++){
-      printf("%-20s%-20x%-20u\n",regs[tmp],cpu.gpr[tmp],cpu.gpr[tmp]);
+      printf("%-25s0x%-25x%-25u\n",regs[tmp],cpu.gpr[tmp],cpu.gpr[tmp]);
   }
   return;
 }

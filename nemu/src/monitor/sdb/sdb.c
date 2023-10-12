@@ -69,6 +69,19 @@ static int cmd_info(char *args){
   return 0;
 }
 
+static int cmd_x(char *args){
+char *expression1=strtok(NULL," ");
+if(*expression1=='r')isa_reg_display();
+//char *expression1=strtok(expression," ");
+//char *expression2=strtok(NULL,"x");
+//uint64_t numm=1;
+//if(expression1!=NULL)numm=atoll(expression1);
+//uint64_t addr=1;
+//if(expression2!=NULL)addr=strtoll(expression2,NULL,16);
+//if (addr!=0)printf("%s","RIGHT");
+  return 0;
+}
+
 static struct {
   const char *name;
   const char *description;
@@ -79,6 +92,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   {"si","Single Step Execute",cmd_si},
   {"info","Information",cmd_info},
+  {"x","Xray the storage",cmd_x},
   /* TODO: Add more commands */
 
 };

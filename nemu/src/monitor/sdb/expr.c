@@ -173,7 +173,6 @@ static int The_main_op(int p,int q){
 }
 
 u_int32_t eval(int p,int q) {
-  printf("succ here");
   int op;
   u_int32_t val1,val2;
   if (p > q) {
@@ -208,7 +207,7 @@ u_int32_t eval(int p,int q) {
 word_t expr(char *e, bool *success) {
   position=0;
   if (!make_token(e)) {
-    *success = false;
+    //*success = false;
     return 0;
   }
   printf("succ here");

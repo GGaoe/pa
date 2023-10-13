@@ -77,8 +77,8 @@ static int cmd_x(char *args){
   char *expression1=strtok(NULL," ");
   long int n=1;
   uint64_t addr=1;
-  sscanf("%ld",expression,&n);
-  sscanf("%lx",expression1,&addr);
+  sscanf("%d",expression,&n);
+  sscanf("%x",expression1,&addr);
   printf(":%ld   %lx\n",n,addr);
   int step=n>0 ? 4 : -4;
   n=n>0?n:-n;

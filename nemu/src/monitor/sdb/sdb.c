@@ -84,7 +84,7 @@ static int cmd_x(char *args){
   uint64_t N_T=0;
   for(;n>0;n--){
     printf("%-10lx:   ",addr+N_T*step);
-    printf("0x%-10x/n",paddr_read(addr,4));
+    printf("0x%-10x\n",paddr_read(addr,4));
     N_T++;
   }
   return 0;

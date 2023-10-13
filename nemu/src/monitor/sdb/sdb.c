@@ -18,6 +18,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
+#include <memory/paddr.h>
 
 static int is_batch_mode = false;
 
@@ -47,9 +48,46 @@ static int cmd_c(char *args) {
   return 0;
 }
 
-
 static int cmd_q(char *args) {
+  nemu_state.state = NEMU_QUIT;
   return -1;
+}
+
+static int cmd_si(char *args){
+  char *expression=strtok(NULL," ");
+  uint64_t n=1;
+  if(expression!=NULL){
+    n=atoll(expression);
+  }
+  cpu_exec(n);
+  return 0;
+}
+
+static int cmd_info(char *args){
+  char *expression=strtok(NULL," ");
+  if(expression==NULL)return -1;
+  if(expression[0]=='r'){
+    isa_reg_display();
+  }
+  return 0;
+}
+
+static int cmd_x(char *args){
+  char *expression=strtok(NULL," ");
+  char *expression1=strtok(NULL," ");
+  long int n=1;
+  uint64_t addr=1;
+  sscanf("%ld",expression,&n);
+  sscanf("%lx",expression1,&addr);
+  int step=n>0 ? 4 : -4;
+  n=n>0?n:-n;
+  uint64_t N_T=0;
+  for(;n>0;n--){
+    printf("%-10lx:   ",addr+N_T*step);
+    printf("0x%-10x/n",paddr_read(addr,4));
+    N_T++;
+  }
+  return 0;
 }
 
 static int cmd_help(char *args);
@@ -62,7 +100,9 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
+  {"si","Single step work",cmd_si},
+  {"info","information",cmd_info},
+  {"x","Xray",cmd_x},
   /* TODO: Add more commands */
 
 };

@@ -85,7 +85,6 @@ static bool make_token(char *e) {
   nr_token = 0;
 
   while (e[position] != '\0') {
-    /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
@@ -101,15 +100,14 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
         tokens[nr_token].type=rules[i].token_type;
-        nr_token++;
         switch (rules[i].token_type) {
           case TK_NUM:
-          {for(int i=0;i<substr_len;i++){
-            tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
-          }break;}
+          {strncpy(tokens[nr_token].str,substr_start,substr_len);
+            tokens[nr_token].str[substr_len] = 0;//Decimal System
+          break;}
           default: break;
         }
-
+        nr_token++;
         break;
       }
     }

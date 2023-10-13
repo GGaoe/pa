@@ -179,10 +179,12 @@ u_int32_t eval(int p,int q) {
   u_int32_t val1,val2;
 
   if (p > q) {
+    printf("%s","succ here");
     printf("%s","BAD Expression");
     assert(0);
   }
   else if (p == q) {
+    printf("%s","succ here");
     if(tokens[p].type!=TK_NUM){
       printf("%s","run wrong");
       assert(0);
@@ -193,9 +195,7 @@ u_int32_t eval(int p,int q) {
     return eval(p + 1, q - 1);
   }
   else {
-    printf("%s","succ here");
     op =The_main_op(p,q);
-    
     val1 = eval(p, op - 1);
     val2 = eval(op + 1, q);
 

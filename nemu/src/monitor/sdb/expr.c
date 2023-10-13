@@ -177,14 +177,12 @@ static int The_main_op(int p,int q){
 u_int32_t eval(int p,int q) {
   int op;
   u_int32_t val1,val2;
-
+printf("%s","succ here");
   if (p > q) {
-    printf("%s","succ here");
     printf("%s","BAD Expression");
     assert(0);
   }
   else if (p == q) {
-    printf("%s","succ here");
     if(tokens[p].type!=TK_NUM){
       printf("%s","run wrong");
       assert(0);

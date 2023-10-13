@@ -79,6 +79,7 @@ static int cmd_x(char *args){
   uint64_t addr=1;
   sscanf("%ld",expression,&n);
   sscanf("%lx",expression1,&addr);
+  printf(":%ld   %lx\n",n,addr);
   int step=n>0 ? 4 : -4;
   n=n>0?n:-n;
   uint64_t N_T=0;

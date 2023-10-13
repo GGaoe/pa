@@ -173,7 +173,7 @@ static int The_main_op(int p,int q){
 }
 
 u_int32_t eval(int p,int q) {
-  //printf("succ here");
+  printf("succ here");
   int op;
   u_int32_t val1,val2;
   if (p > q) {

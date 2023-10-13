@@ -100,18 +100,18 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
         tokens[nr_token].type=rules[i].token_type;
+        nr_token++;
         switch (rules[i].token_type) {
           case TK_NUM:
-          {strncpy(tokens[nr_token].str,substr_start,substr_len);
-            tokens[nr_token].str[substr_len] = 0;//Decimal System
-          break;}
+          {for(int i=0;i<substr_len;i++){
+            tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
+          }break;}
           default: break;
         }
-        nr_token++;
+
         break;
       }
     }
-
     if (i == NR_REGEX) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
@@ -173,6 +173,7 @@ static int The_main_op(int p,int q){
 }
 
 u_int32_t eval(int p,int q) {
+  printf("succ here");
   int op;
   u_int32_t val1,val2;
   if (p > q) {

@@ -77,6 +77,7 @@ static int cmd_x(char *args){
   char *expression1=strtok(NULL," ");
   long int n=1;
   uint64_t addr=1;
+  if(expression==NULL)assert(0);
   sscanf("%d",expression,&n);
   sscanf("%x",expression1,&addr);
   printf(":%ld   %lx\n",n,addr);

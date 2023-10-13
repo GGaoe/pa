@@ -194,6 +194,7 @@ u_int32_t eval(int p,int q) {
   }
   else {
     op =The_main_op(p,q);
+    printf("\n%d\n",tokens[op].type);
     val1 = eval(p, op - 1);
     val2 = eval(op + 1, q);
 
@@ -212,8 +213,6 @@ word_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-  printf("%s\n","Position:");
-  printf("%d\n",tokens[1].type);
   printf("%d",eval(0,position-1));
   /* TODO: Insert codes to evaluate the expression. */
   TODO();

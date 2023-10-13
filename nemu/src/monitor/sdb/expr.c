@@ -183,7 +183,10 @@ u_int32_t eval(int p,int q) {
     assert(0);
   }
   else if (p == q) {
-    assert(tokens[p].type==TK_NUM);
+    if(tokens[p].type!=TK_NUM){
+      printf("%s","run wrong");
+      assert(0);
+    }
     return atoi(tokens[p].str);
   }
   else if (check_parentheses(p, q) == true) {
@@ -210,7 +213,6 @@ word_t expr(char *e, bool *success) {
     return 0;
   }
   printf("%s\n","Position:");
-  printf("%d\n",TK_ADD);
   printf("%d\n",tokens[1].type);
   printf("%d",eval(0,position-1));
   /* TODO: Insert codes to evaluate the expression. */

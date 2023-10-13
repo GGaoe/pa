@@ -89,18 +89,23 @@ static bool make_token(char *e) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
-
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
-
+        if(rules[i].token_type==TK_NOTYPE)continue;
+        if(substr_len>31)assert(0);
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-
+        tokens[nr_token].type=rules[i].token_type;
+        nr_token++;
         switch (rules[i].token_type) {
+          case TK_NUM:
+          for(int i=0;i<substr_len;i++){
+            tokens[nr_token-1].str[i]=*(substr_start+i);
+          }
           default: TODO();
         }
 

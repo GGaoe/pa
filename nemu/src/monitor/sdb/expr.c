@@ -214,7 +214,6 @@ word_t expr(char *e, bool *success) {
   }
   printf("%d",eval(0,position-1));
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
 
   return 0;
 }

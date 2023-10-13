@@ -187,14 +187,14 @@ u_int32_t eval(int p,int q) {
       printf("%s","run wrong");
       assert(0);
     }
-    //return atoi(tokens[p].str);
-    return 1;
+    return atoi(tokens[p].str);
   }
   else if (check_parentheses(p, q) == true) {
     return eval(p + 1, q - 1);
   }
   else {
     op =The_main_op(p,q);
+    printf("%s","succ here");
     val1 = eval(p, op - 1);
     val2 = eval(op + 1, q);
 

@@ -105,8 +105,7 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
           case TK_NUM:
           {for(int i=0;i<substr_len;i++){
-            //tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
-            tokens[nr_token-1].str[i]=1;//Decimal System
+            tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
           }break;}
           default: break;
         }
@@ -188,7 +187,8 @@ u_int32_t eval(int p,int q) {
       printf("%s","run wrong");
       assert(0);
     }
-    return atoi(tokens[p].str);
+    //return atoi(tokens[p].str);
+    return 1;
   }
   else if (check_parentheses(p, q) == true) {
     return eval(p + 1, q - 1);

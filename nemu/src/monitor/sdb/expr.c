@@ -210,8 +210,8 @@ word_t expr(char *e, bool *success) {
     return 0;
   }
   printf("%s\n","Position:");
-  printf("%d\n",position-1);
-  printf("%d\n",tokens[0].type);
+  printf("%d\n",TK_ADD);
+  printf("%d\n",tokens[1].type);
   printf("%d",eval(0,position-1));
   /* TODO: Insert codes to evaluate the expression. */
   TODO();

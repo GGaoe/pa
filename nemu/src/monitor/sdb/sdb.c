@@ -75,15 +75,16 @@ static int cmd_info(char *args){
 static int cmd_x(char *args){
   char *expression=strtok(NULL," ");
   char *expression1=strtok(NULL," ");
-  long int n;
+  long int num;
   uint64_t addr;
-  sscanf("%d",expression,&n);
+  sscanf("%d",expression,&num);
   sscanf("%x",expression1,&addr);
-  printf(":%ld   %lx\n",n,addr);
-  int step=n>0 ? 4 : -4;
-  n=n>0?n:-n;
+  printf(":%s   %s\n",expression,expression1);
+  printf(":%ld   %lx\n",num,addr);
+  int step=num>0 ? 4 : -4;
+  num=num>0?num:-num;
   uint64_t N_T=0;
-  for(;n>0;n--){
+  for(;num>0;num--){
     printf("%-10lx:   ",addr+N_T*step);
     printf("0x%-10x\n",paddr_read(addr,4));
     N_T++;

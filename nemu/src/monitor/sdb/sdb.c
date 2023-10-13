@@ -90,6 +90,18 @@ static int cmd_x(char *args){
   return 0;
 }
 
+static int cmd_p(char *args){
+  bool flag=1;
+  bool *flag1=&flag;
+  char *expression=strtok(NULL," ");
+  expr(expression,flag1);
+  if(!flag){
+    printf("%s","WRONG!");
+    assert(0);
+  }
+  return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -103,6 +115,7 @@ static struct {
   {"si","Single step work",cmd_si},
   {"info","information",cmd_info},
   {"x","Xray",cmd_x},
+  {"p","Program",cmd_p},
   /* TODO: Add more commands */
 
 };

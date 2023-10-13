@@ -21,10 +21,10 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,
-  TK_SUB,TK_MUL,TK_DIV,TK_LEFT,TK_RIGHT,TK_NUM,
+  TK_NOTYPE = 256,TK_ADD, TK_EQ,
+  TK_SUB,TK_MUL,TK_DIV,
+  TK_LEFT,TK_RIGHT,TK_NUM,
   /* TODO: Add more token types */
-
 };
 
 static struct rule {
@@ -37,7 +37,7 @@ static struct rule {
    */
 
   {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
+  {"\\+", TK_ADD},         // plus
   {"-",TK_SUB},
   {"\\*",TK_MUL},
   {"/",TK_DIV},
@@ -76,8 +76,9 @@ typedef struct token {
 static Token tokens[32] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
+int position = 0;//changed
+
 static bool make_token(char *e) {
-  int position = 0;
   int i;
   regmatch_t pmatch;
 
@@ -104,7 +105,7 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
           case TK_NUM:
           for(int i=0;i<substr_len;i++){
-            tokens[nr_token-1].str[i]=*(substr_start+i);
+            tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
           }
           default: TODO();
         }
@@ -122,13 +123,93 @@ static bool make_token(char *e) {
   return true;
 }
 
+static bool check_parentheses(int p,int  q){
+  if(tokens[p].type!=TK_LEFT||tokens[q].type!=TK_RIGHT)return false;
+  int count_left=0;
+  int count_right=0;
+  for(int i=p;i<=q;i++){
+    if(tokens[i].type==TK_LEFT)count_left++;
+    if(tokens[i].type==TK_RIGHT)count_right++;
+    if(count_left==count_right)return (i==q);
+  }
+  return false;
+}
+
+static int The_main_op(int p,int q){
+  int op=-1;
+  while(p<q)
+  {
+    if(tokens[p].type==TK_NUM){
+      p++;continue;
+    }
+    else if(tokens[p].type==TK_LEFT){
+      int count=1;
+      while(count!=0){
+          p++;
+          if(tokens[p].type==TK_LEFT)count++;
+          else if(tokens[p].type==TK_RIGHT)count--;
+      }
+      p++;
+      if(p>q)return op;
+      if(op==-1)op=p;
+      else if(tokens[p].type==TK_ADD||TK_SUB){
+        op=p;
+      }
+      else if(tokens[p].type==TK_MUL||TK_DIV){
+        if(tokens[op].type==TK_MUL||TK_DIV)op=p;
+      }
+      p++;
+    }
+    else {
+      if(op==-1)op=p;
+      else if(tokens[p].type==TK_ADD||TK_SUB){
+        op=p;
+      }
+      else if(tokens[p].type==TK_MUL||TK_DIV){
+        if(tokens[op].type==TK_MUL||TK_DIV)op=p;
+      }
+      p++;
+    }
+  }
+  return op;
+}
+
+u_int32_t eval(int p,int q) {
+  int op;
+  u_int32_t val1,val2;
+
+  if (p > q) {
+    printf("%s","BAD Expression");
+    assert(0);
+  }
+  else if (p == q) {
+    assert(tokens[p].type==TK_NUM);
+    return atoi(tokens[p].str);
+  }
+  else if (check_parentheses(p, q) == true) {
+    return eval(p + 1, q - 1);
+  }
+  else {
+    op =The_main_op(p,q);
+    val1 = eval(p, op - 1);
+    val2 = eval(op + 1, q);
+
+    switch (rules[op].token_type) {
+      case '+': return val1 + val2;
+      case '-': return val1 - val2;
+      case '*': return val1 * val2;
+      case '/': return val1 / val2;
+      default: assert(0);
+    }
+  }
+}
 
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
   }
-
+  printf("%d",eval(0,position-1));
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
 

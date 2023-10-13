@@ -105,9 +105,9 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
           case TK_NUM:
           for(int i=0;i<substr_len;i++){
-            //tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
+            tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
           }
-          default: TODO();
+          //default: TODO();
         }
 
         break;

@@ -209,7 +209,7 @@ word_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-  printf("%d",eval(0,position-1));
+  //printf("%d",eval(0,position-1));
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
 

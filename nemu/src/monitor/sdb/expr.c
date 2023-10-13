@@ -208,12 +208,11 @@ u_int32_t eval(int p,int q) {
 
 word_t expr(char *e, bool *success) {
   position=0;
-  printf("%s\n","succ here");
   if (!make_token(e)) {
     *success = false;
     return 0;
   }
-  printf("%s\n","succ here");
+  printf("%s","succ here");
   printf("%d",eval(0,position-1));
   /* TODO: Insert codes to evaluate the expression. */
 

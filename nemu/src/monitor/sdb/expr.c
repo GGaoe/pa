@@ -194,15 +194,14 @@ u_int32_t eval(int p,int q) {
   }
   else {
     op =The_main_op(p,q);
-    printf("\n%d\n",tokens[op].type);
     val1 = eval(p, op - 1);
     val2 = eval(op + 1, q);
 
     switch (rules[op].token_type) {
-      case '+': return val1 + val2;
-      case '-': return val1 - val2;
-      case '*': return val1 * val2;
-      case '/': return val1 / val2;
+      case TK_ADD: return val1 + val2;
+      case TK_SUB: return val1 - val2;
+      case TK_MUL: return val1 * val2;
+      case TK_DIV: return val1 / val2;
       default: assert(0);
     }
   }

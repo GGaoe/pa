@@ -23,7 +23,7 @@
 enum {
   TK_NOTYPE = 256,TK_ADD, TK_EQ,
   TK_SUB,TK_MUL,TK_DIV,
-  TK_LEFT,TK_RIGHT,TK_NUM,TK_NOEQ,TK_AND,TK_REG,TK_HEX,
+  TK_LEFT,TK_RIGHT,TK_NOEQ,TK_AND,TK_REG,TK_HEX,TK_NUM,
   /* TODO: Add more token types */
 };
 
@@ -44,11 +44,11 @@ static struct rule {
   {"/",TK_DIV},
   {"\\(",TK_LEFT},
   {"\\)",TK_RIGHT},
-  {"[0-9]+",TK_NUM},
   {"\\!\\=",TK_NOEQ},
   {"\\&\\&",TK_AND},
   {"\\$[a-zA-Z]*[0-9]*",TK_REG},
   {"0[xX][0-9a-fA-F]+",TK_HEX},
+  {"[0-9]+",TK_NUM},
  
 };
 

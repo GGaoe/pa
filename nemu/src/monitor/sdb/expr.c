@@ -106,10 +106,12 @@ static bool make_token(char *e) {
         tokens[nr_token].type=rules[i].token_type;
         nr_token++;
         switch (rules[i].token_type) {
-          case TK_NUM:
           case TK_REG:
           case TK_HEX:
           {for(int i=0;i<substr_len;i++){
+            tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
+          }break;}
+          case TK_NUM:{for(int i=0;i<substr_len;i++){
             tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
           }break;}
           case TK_EQ:

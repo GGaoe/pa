@@ -194,7 +194,7 @@ u_int32_t eval(int p,int q) {
     val1 = eval(p, op - 1);
     val2 = eval(op + 1, q);
 
-    switch (rules[op].token_type) {
+    switch (tokens[op].type) {
       case TK_ADD: return val1 + val2;
       case TK_SUB: return val1 - val2;
       case TK_MUL: return val1 * val2;
@@ -210,8 +210,7 @@ word_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-  printf("succ here");
-  printf("%d",eval(0,position-1));
+  printf("%d",eval(0,nr_token-1));
   /* TODO: Insert codes to evaluate the expression. */
 
   return 0;

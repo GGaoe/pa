@@ -189,7 +189,8 @@ u_int32_t eval(int p,int q) {
       case TK_ADD: return val1 + val2;
       case TK_SUB: return val1 - val2;
       case TK_MUL: return val1 * val2;
-      case TK_DIV: return val1 / val2;
+      case TK_DIV: 
+      {if(val2==0)assert(0); return val1 / val2;}
       default: assert(0);
     }
   }

@@ -163,7 +163,7 @@ static int The_main_op(int p,int q){
     else if(tokens[op].type==TK_MUL||tokens[op].type==TK_DIV){op=p;}
     else if(tokens[p].type==TK_AND){op=p;}
     else if((tokens[op].type!=TK_AND)&&(tokens[p].type==TK_EQ||tokens[p].type==TK_NOEQ)){op=p;}
-    else if((tokens[op].type!=TK_AND||tokens[p].type==TK_EQ||tokens[p].type==TK_NOEQ)
+    else if((tokens[op].type!=TK_AND&&tokens[p].type!=TK_EQ&&tokens[p].type!=TK_NOEQ)
            &&(tokens[p].type==TK_ADD||tokens[p].type==TK_SUB)){op=p;}
     p++;
   }

@@ -24,6 +24,9 @@ static int is_batch_mode = false;
 
 void init_regex();
 void init_wp_pool();
+void new_wp(char *args);
+void free_wp(int n);
+void display_wp(void);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -69,6 +72,9 @@ static int cmd_info(char *args){
   if(expression[0]=='r'){
     isa_reg_display();
   }
+  if(expression[0]=='w'){
+    display_wp();
+  }
   return 0;
 }
 
@@ -102,6 +108,21 @@ static int cmd_p(char *args){
   return 0;
 }
 
+static int cmd_w(char *args){
+  char *expression=strtok(NULL,"");
+  new_wp(expression);
+  //
+  return 0;
+}
+
+static int cmd_d(char *args){
+  int n;
+  char *expression=strtok(NULL,"");
+  sscanf(expression,"%d",&n);
+  free_wp(n);
+  return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -116,6 +137,8 @@ static struct {
   {"info","information",cmd_info},
   {"x","Xray",cmd_x},
   {"p","Program",cmd_p},
+  {"w","set watchpoint",cmd_w},
+  {"d","delete watchpoint",cmd_d},
   /* TODO: Add more commands */
 
 };

@@ -32,9 +32,6 @@ static struct rule {
   int token_type;
 } rules[] = {
 
-  /* TODO: Add more rules.
-   * Pay attention to the precedence level of different rules.
-   */
 
   {" +", TK_NOTYPE},    // spaces
   {"\\+", TK_ADD},         // plus
@@ -164,7 +161,9 @@ static int The_main_op(int p,int q){
     }
     else {
       if(op==-1){op=p;}
-      else if(tokens[p].type==TK_ADD||tokens[p].type==TK_SUB){
+      else if(tokens[p].type==TK_AND)op=p;
+      else if(tokens[op].type!=TK_AND&&(tokens[p].type==TK_EQ||TK_NOEQ))op=p;
+      else if((tokens[op].type!=TK_AND||TK_EQ||TK_NOEQ)&&(tokens[p].type==TK_ADD||TK_SUB)){
         op=p;
       }
       else if(tokens[op].type==TK_MUL||tokens[op].type==TK_DIV){
@@ -180,15 +179,13 @@ u_int32_t eval(int p,int q) {
   int op;
   u_int32_t val1,val2;
   if (p > q) {
-    printf("%s","BAD Expression");
+    printf("BAD Expression");
     assert(0);
   }
   else if (p == q) {
-    if(tokens[p].type!=TK_NUM){
-      printf("%s","run wrong");
-      assert(0);
+    if(tokens[p].type==TK_NUM){
+      return atoi(tokens[p].str);
     }
-    return atoi(tokens[p].str);
   }
   else if (check_parentheses(p, q) == true) {
     return eval(p + 1, q - 1);
@@ -197,16 +194,96 @@ u_int32_t eval(int p,int q) {
     op =The_main_op(p,q);
     val1 = eval(p, op - 1);
     val2 = eval(op + 1, q);
-    //printf("%d;%d\n",val1,val2);
     switch (tokens[op].type) {
       case TK_ADD: return val1 + val2;
       case TK_SUB: return val1 - val2;
       case TK_MUL: return val1 * val2;
-      case TK_DIV: 
-      {if(val2==0)assert(0); return val1 / val2;}
+      case TK_DIV: {if(val2==0){
+                    printf("div 0 error!");
+                    assert(0);
+                    return val1/val2;
+                    } 
+                    return val1 / val2;}
+      case TK_AND:return val1 && val2;
+      case TK_EQ: return (val1==val2);
+      case TK_NOEQ: return (val1!=val2);
       default: assert(0);
     }
   }
+  return 0;
+}
+
+void int_to_char(int n,char x[]){
+  int len=strlen(x);
+  memset(x,0,len);
+  char a[32]="";
+  int length=0;
+  while(n!=0){
+    int p=n%10;
+    p/=10;
+    a[length]=p+'0';
+    length++;
+  }
+  for(int i=0;i<length;i++){
+    x[i]=a[length-i-1];
+  }
+  return;
+}
+
+int char_to_int(char n[]){
+  int s_size = strlen(n);
+    int tmp = 0 ;
+    for(int i = 0 ; i < s_size ; i ++)
+    {
+	tmp += n[i] - '0';
+	tmp *= 10;
+    }
+    tmp /= 10;
+    return tmp;
+}
+
+void init_exp(){
+  for(int i=0;i<nr_token;i++){
+    if(tokens[i].type==TK_REG){//reg
+      bool flag1 = true;
+	    int tmp = isa_reg_str2val(tokens[i].str, &flag1);
+	    if(flag1){
+		    int_to_char(tmp, tokens[i].str);
+       }
+       tokens[i].type=TK_NUM;
+    }
+
+    else if(tokens[i].type==TK_HEX){//hex
+      int m = strtol(tokens[i].str, NULL, 16);
+      int_to_char(m,tokens[i].str);
+      tokens[i].type=TK_NUM;
+    }
+  }
+
+  for(int i=0;i<nr_token;i++){ // minus
+    if((i>0&&tokens[i].type==TK_SUB&&tokens[i-1].type!=TK_NUM)||(i==0&&tokens[i].type==TK_SUB)){
+      if(tokens[i+1].type==TK_SUB){
+        for(int j=i;j<nr_token-2;j++){
+            tokens[i]=tokens[i+2];
+        }
+        nr_token-=2;
+        i--;
+      }
+      else{
+        for(int j=i;j<nr_token-1;j++){
+            tokens[i]=tokens[i+1];
+        }
+        for(int j = 31 ; j >= 0 ; j --){
+		      tokens[i+1].str[j] = tokens[i+1].str[j-1];
+	      }
+	      tokens[i+1].str[0] = '-';
+        nr_token-=1;
+      }
+
+    }
+  }
+
+  return;
 }
 
 word_t expr(char *e, bool *success) {
@@ -215,6 +292,9 @@ word_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
+
+  init_exp();
+
   printf("%d",eval(0,nr_token-1));
 
   return 0;

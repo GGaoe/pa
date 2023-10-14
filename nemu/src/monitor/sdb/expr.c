@@ -166,7 +166,7 @@ static int The_main_op(int p,int q){
     else if((tokens[op].type!=TK_AND||TK_EQ||TK_NOEQ)&&(tokens[p].type==TK_ADD||TK_SUB)){op=p;}
     p++;
   }
-  printf("%d:%d",op,TK_ADD);
+  printf("%d:\n",op);
   return op;
   
 }

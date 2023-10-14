@@ -38,13 +38,14 @@ static struct rule {
 
   {" +", TK_NOTYPE},    // spaces
   {"\\+", TK_ADD},         // plus
+   {"==", TK_EQ},        // equal
   {"-",TK_SUB},
   {"\\*",TK_MUL},
   {"/",TK_DIV},
   {"\\(",TK_LEFT},
   {"\\)",TK_RIGHT},
   {"[0-9]+",TK_NUM},
-  {"==", TK_EQ},        // equal
+ 
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -160,7 +161,7 @@ static int The_main_op(int p,int q){
     }
     else {
       if(op==-1)op=p;
-      else if(tokens[p].type==TK_MUL||tokens[p].type==TK_DIV){
+      else if(tokens[p].type==TK_ADD||tokens[p].type==TK_SUB){
         op=p;
         printf("%d\n",op);
       }

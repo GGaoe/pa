@@ -162,8 +162,8 @@ static int The_main_op(int p,int q){
     else if(op==-1){op=p;printf("1\n");}
     else if(tokens[op].type==TK_MUL||tokens[op].type==TK_DIV){op=p;printf("2\n");}
     else if(tokens[p].type==TK_AND){op=p;printf("3\n");}
-    else if((tokens[op].type!=TK_AND)&&(tokens[p].type==TK_EQ)){op=p;printf("4\n");}
-    else if((tokens[op].type!=TK_AND||TK_EQ||TK_NOEQ)&&(tokens[p].type==TK_ADD||TK_SUB)){op=p;printf("5\n");}
+    else if((tokens[op].type!=TK_AND)&&(tokens[p].type==TK_EQ||tokens[p].type==TK_NOEQ)){op=p;printf("4\n");}
+    else if((tokens[op].type!=TK_AND||tokens[p].type==TK_EQ||tokens[p].type==TK_NOEQ)&&(tokens[p].type==TK_ADD||tokens[p].type==TK_SUB)){op=p;printf("5\n");}
     p++;
   }
   printf("%d:\n",op);

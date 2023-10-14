@@ -161,10 +161,12 @@ static int The_main_op(int p,int q){
     else {
       if(op==-1)op=p;
       else if(tokens[p].type==TK_ADD||TK_SUB){
+        printf("1");
         op=p;
       }
       else if(tokens[p].type==TK_MUL||TK_DIV){
         if(tokens[op].type==TK_MUL||TK_DIV)op=p;
+        printf("2");
       }
       p++;
     }

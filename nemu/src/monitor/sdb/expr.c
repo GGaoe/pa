@@ -180,8 +180,7 @@ u_int32_t eval(int p,int q) {
   }
   else if (p == q) {
     if(tokens[p].type==TK_NUM){
-      printf("%c\n",tokens[p].str[0]);
-      printf("%d",atoi(tokens[p].str));
+      //printf("%c\n",tokens[p].str[0]);
       return atoi(tokens[p].str);
     }
   }
@@ -272,9 +271,9 @@ void init_exp(){
             tokens[i]=tokens[i+1];
         }
         for(int j = 31 ; j >= 0 ; j --){
-		      tokens[i+1].str[j] = tokens[i+1].str[j-1];
+		      tokens[i].str[j] = tokens[i].str[j-1];
 	      }
-	      tokens[i+1].str[0] = '-';
+	      tokens[i].str[0] = '-';
         nr_token-=1;
       }
 

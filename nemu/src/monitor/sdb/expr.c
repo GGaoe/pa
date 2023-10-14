@@ -230,7 +230,7 @@ void int_to_char(int n,char x[]){
 int char_to_int(char n[]){
   int s_size = strlen(n);
     int tmp = 0 ;
-    for(int i = 0 ; i < s_size ; i ++)
+    for(int i=0;i <s_size ; i++)
     {
 	tmp += n[i] - '0';
 	tmp *= 10;

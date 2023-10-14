@@ -27,6 +27,7 @@ typedef struct watchpoint {
 static WP wp_pool[NR_WP] = {};
 static WP *head = NULL, *free_ = NULL;
 
+
 void init_wp_pool() {
   int i;
   for (i = 0; i < NR_WP; i ++) {
@@ -106,3 +107,23 @@ void display_wp(void){
   return;
 }
 
+bool val_changed(){
+   WP *index=head;
+  while(index!=NULL){
+    bool success = false;
+    int tmp = expr(index->str,&success);
+    if(success){
+       if(tmp != index->val)
+          {
+          
+          printf("stop here:%d\n",index->NO);
+          return 1;
+          }
+     }
+    else{
+        printf("error.\n");
+        assert(0);
+    }
+  }
+  return 0;
+}

@@ -93,7 +93,7 @@ static int cmd_x(char *args){
 static int cmd_p(char *args){
   bool flag=1;
   bool *flag1=&flag;
-  char *expression=strtok(NULL," ");
+  char *expression=strtok(NULL,"");
   expr(expression,flag1);
   if(!flag){
     printf("%s","WRONG!");

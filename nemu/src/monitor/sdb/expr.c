@@ -180,6 +180,7 @@ u_int32_t eval(int p,int q) {
   }
   else if (p == q) {
     if(tokens[p].type==TK_NUM){
+      printf("%c\n",tokens[p].str[0]);
       printf("%d",atoi(tokens[p].str));
       return atoi(tokens[p].str);
     }

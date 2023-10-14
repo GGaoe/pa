@@ -139,7 +139,6 @@ static int The_main_op(int p,int q){
   while(p<q)
   {
     if(tokens[p].type==TK_NUM){
-      p++;continue;
     }
     else if(tokens[p].type==TK_LEFT){
       int count=1;
@@ -148,30 +147,19 @@ static int The_main_op(int p,int q){
           if(tokens[p].type==TK_LEFT)count++;
           else if(tokens[p].type==TK_RIGHT)count--;
       }
-      p++;
-      if(p>q)return op;
-      if(op==-1)op=p;
-      else if(tokens[p].type==TK_ADD||tokens[p].type==TK_SUB){
-        op=p;
-      }
-      else if(tokens[p].type==TK_MUL||TK_DIV){
-        if(tokens[op].type==TK_MUL||TK_DIV)op=p;
-      }
-      p++;
+      
     }
     else {
-      if(op==-1){op=p;printf("%d:%d:%d\n",op,tokens[p].type,TK_ADD);}
+      if(op==-1){op=p;}
       else if(tokens[p].type==TK_ADD||tokens[p].type==TK_SUB){
-        printf("%d:%d\n",tokens[p].type,TK_ADD);
         op=p;
-        //printf("%d\n",op);
       }
-      else if(tokens[p].type==TK_MUL||TK_DIV){
-        if(tokens[op].type==TK_MUL||TK_DIV){op=p;}
+      else if(tokens[op].type==TK_MUL||tokens[op].type==TK_DIV){
+        op=p;
       }
-      p++;
-    }
+    }p++;
   }
+  
   return op;
 }
 

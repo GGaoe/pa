@@ -160,14 +160,10 @@ static int The_main_op(int p,int q){
     }
     else {
       if(op==-1){op=p;}
+      if(tokens[op].type==TK_MUL||tokens[op].type==TK_DIV){op=p;}
       if(tokens[p].type==TK_AND)op=p;
       if(tokens[op].type!=TK_AND&&(tokens[p].type==TK_EQ||TK_NOEQ))op=p;
-      if((tokens[op].type!=TK_AND||TK_EQ||TK_NOEQ)&&(tokens[p].type==TK_ADD||TK_SUB)){
-        op=p;
-      }
-      if(tokens[op].type==TK_MUL||tokens[op].type==TK_DIV){
-        op=p;
-      }
+      if((tokens[op].type!=TK_AND||TK_EQ||TK_NOEQ)&&(tokens[p].type==TK_ADD||TK_SUB)){op=p;}
     }p++;
   }
   

@@ -176,7 +176,7 @@ u_int32_t eval(int p,int q) {
   u_int32_t val1,val2;
   if (p > q) {
     printf("BAD Expression");
-    assert(0);
+    //assert(0);
   }
   else if (p == q) {
     if(tokens[p].type==TK_NUM){
@@ -212,7 +212,7 @@ u_int32_t eval(int p,int q) {
 
 void int_to_char(int n,char x[]){
   int len=strlen(x);
-  memset(x,0,len);
+  memset(x,'\0',len);
   char a[32]="";
   int length=0;
   while(n!=0){

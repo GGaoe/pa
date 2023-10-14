@@ -270,10 +270,6 @@ void init_exp(){
         for(int j=i;j<nr_token-1;j++){
             tokens[i]=tokens[i+1];
         }
-        for(int j = 31 ; j >= 0 ; j --){
-		      tokens[i].str[j] = tokens[i].str[j-1];
-	      }
-	      tokens[i].str[0] = '-';
         nr_token-=1;
       }
 
@@ -281,7 +277,7 @@ void init_exp(){
   }
 
   return;
-}
+} 
 
 word_t expr(char *e, bool *success) {
   position=0;

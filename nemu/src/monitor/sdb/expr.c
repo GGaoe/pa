@@ -292,6 +292,7 @@ word_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
+  else *success=1;
 
   init_exp();
 

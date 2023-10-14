@@ -167,6 +167,7 @@ static int The_main_op(int p,int q){
     p++;
   }
   return op;
+  printf("%d:%d",op,TK_ADD);
 }
 
 u_int32_t eval(int p,int q) {

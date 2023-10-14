@@ -163,7 +163,8 @@ static int The_main_op(int p,int q){
     else if(tokens[op].type==TK_MUL||tokens[op].type==TK_DIV){op=p;}
     else if(tokens[p].type==TK_AND){op=p;}
     else if((tokens[op].type!=TK_AND)&&(tokens[p].type==TK_EQ||tokens[p].type==TK_NOEQ)){op=p;}
-    else if((tokens[op].type!=TK_AND||tokens[p].type==TK_EQ||tokens[p].type==TK_NOEQ)&&(tokens[p].type==TK_ADD||tokens[p].type==TK_SUB)){op=p;}
+    else if((tokens[op].type!=TK_AND||tokens[p].type==TK_EQ||tokens[p].type==TK_NOEQ)
+           &&(tokens[p].type==TK_ADD||tokens[p].type==TK_SUB)){op=p;}
     p++;
   }
   return op;
@@ -179,6 +180,7 @@ u_int32_t eval(int p,int q) {
   }
   else if (p == q) {
     if(tokens[p].type==TK_NUM){
+      printf("%d",atoi(tokens[p].str));
       return atoi(tokens[p].str);
     }
   }

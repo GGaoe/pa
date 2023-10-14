@@ -166,8 +166,9 @@ static int The_main_op(int p,int q){
     else if((tokens[op].type!=TK_AND||TK_EQ||TK_NOEQ)&&(tokens[p].type==TK_ADD||TK_SUB)){op=p;}
     p++;
   }
-  return op;
   printf("%d:%d",op,TK_ADD);
+  return op;
+  
 }
 
 u_int32_t eval(int p,int q) {

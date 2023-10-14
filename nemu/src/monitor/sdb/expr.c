@@ -161,12 +161,10 @@ static int The_main_op(int p,int q){
     else {
       if(op==-1)op=p;
       else if(tokens[p].type==TK_ADD||TK_SUB){
-        printf("1");
         op=p;
       }
       else if(tokens[p].type==TK_MUL||TK_DIV){
         if(tokens[op].type==TK_MUL||TK_DIV)op=p;
-        printf("2");
       }
       p++;
     }
@@ -195,7 +193,7 @@ u_int32_t eval(int p,int q) {
     op =The_main_op(p,q);
     val1 = eval(p, op - 1);
     val2 = eval(op + 1, q);
-
+    printf("%d;%d\n",val1,val2);
     switch (tokens[op].type) {
       case TK_ADD: return val1 + val2;
       case TK_SUB: return val1 - val2;

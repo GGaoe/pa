@@ -217,7 +217,7 @@ void int_to_char(int n,char x[]){
   int length=0;
   while(n!=0){
     int p=n%10;
-    p/=10;
+    n/=10;
     a[length]=p+'0';
     length++;
   }

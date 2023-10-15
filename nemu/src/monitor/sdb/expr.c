@@ -182,6 +182,7 @@ u_int32_t eval(int p,int q) {
   else if (p == q) {
     if(tokens[p].type==TK_NUM){
       //printf("%c\n",tokens[p].str[0]);
+      printf("%d\n",atoi(tokens[p].str));
       return atoi(tokens[p].str);
     }
   }
@@ -260,7 +261,7 @@ void init_exp(){
 
   for(int i=0;i<nr_token;i++){ // minus
     if((i>0&&tokens[i].type==TK_SUB&&tokens[i-1].type!=TK_NUM)||(i==0&&tokens[i].type==TK_SUB)){
-      if(tokens[i+1].type==TK_SUB&&tokens[i+2].type!=TK_NUM){
+      if(tokens[i+1].type==TK_SUB){
         for(int j=i;j<nr_token-2;j++){
             tokens[i]=tokens[i+2];
         }

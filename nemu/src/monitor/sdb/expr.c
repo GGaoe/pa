@@ -289,14 +289,36 @@ void init_exp(){
         tokens[i].str[0]='-';
         nr_token-=1;
       }
-      /*else if(tokens[i+1].type==TK_LEFT){
+
+      else if(tokens[i+1].type==TK_LEFT){
+        if(i>0&&(tokens[i-1].type==TK_RIGHT||tokens[i-1].type==TK_NUM)){
+            continue;
+        }
+        else{
         int count=1;
         int j=i+2;
         while(count!=0){
             if(tokens[j].type==TK_LEFT)count++;
             else if(tokens[j].type==TK_RIGHT)count--;
+            j++;
+            }
+        for(int k= nr_token+3;k>j+3;k--){
+          tokens[k]=tokens[k-4];
         }
-      }*/
+        tokens[j+3].type=TK_RIGHT;
+        for(int k=j-1;k>i;k--){
+          tokens[k+3]=tokens[k];
+        }
+
+        }
+        tokens[i+1].type=TK_LEFT;
+        tokens[i+2].type=TK_NUM;
+        int len=strlen(tokens[i+2].str);
+        memset(tokens[i+2].str,'\0',len);
+        tokens[i+2].str[0]='0';
+        tokens[i+3].type=TK_SUB;
+        
+      }
     }
   }
 

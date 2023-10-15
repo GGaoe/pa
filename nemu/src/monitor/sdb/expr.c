@@ -182,7 +182,7 @@ u_int32_t eval(int p,int q) {
   else if (p == q) {
     if(tokens[p].type==TK_NUM){
       //printf("%c\n",tokens[p].str[0]);
-      printf("%d\n",atoi(tokens[p].str));
+      //printf("%d\n",atoi(tokens[p].str));
       return atoi(tokens[p].str);
     }
   }
@@ -269,6 +269,7 @@ void init_exp(){
         i--;
       }
       else if(tokens[i+1].type==TK_NUM){
+        printf("MOther fuck!\n");
         for(int j=i;j<nr_token-1;j++){
             tokens[i]=tokens[i+1];
         }

@@ -191,7 +191,7 @@ static int The_main_op(int p,int q,bool *flag_minus){
     {
       if(tokens[p].type==TK_ADD)op=p;
       else {
-        if(tokens[p-1].type!=TK_NUM||tokens[p-1].type!=TK_RIGHT){
+        if(tokens[p-1].type!=TK_NUM&&tokens[p-1].type!=TK_RIGHT){
           continue;
         }
         else

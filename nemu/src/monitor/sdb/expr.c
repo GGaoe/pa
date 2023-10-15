@@ -269,7 +269,7 @@ void init_exp(){
       if(tokens[i+1].type==TK_SUB){
        // printf("1:MOther fuck!\n");
         for(int j=i;j<nr_token-2;j++){
-            tokens[j].type=tokens[j+2].type;
+            tokens[j]=tokens[j+2];
         }
         nr_token-=2;
         i--;

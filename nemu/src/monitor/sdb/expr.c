@@ -301,11 +301,11 @@ void init_exp(){
   for(int i=0;i<nr_token;i++){
     if(tokens[i].type==TK_REG){//reg
       bool flag1 = 0;
-	    int tmp = isa_reg_str2val(tokens[i].str, &flag1);
+	    long int tmp = isa_reg_str2val(tokens[i].str, &flag1);
 	    if(flag1){
-        printf("%d\n",tmp);
+        //printf("%d\n",tmp);
 		    int_to_char(tmp, tokens[i].str);
-        printf("str:%s\ns",tokens[i].str);
+        //printf("str:%s\ns",tokens[i].str);
        }
       else assert(0);
        tokens[i].type=TK_NUM;

@@ -176,7 +176,7 @@ u_int32_t eval(int p,int q) {
   u_int32_t val1,val2;
   if (p > q) {
     printf("BAD Expression");
-    assert(0);
+    assert(p<=q);
     return -1;
   }
   else if (p == q) {

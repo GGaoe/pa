@@ -106,10 +106,14 @@ static bool make_token(char *e) {
           case TK_REG:
           case TK_HEX:
           {for(int i=0;i<substr_len;i++){
-            strncpy(tokens[nr_token].str, &e[position - substr_len], substr_len);
+            //int len=strlen(tokens[nr_token-1].str);
+            //memset(tokens[nr_token-1].str,0,len);
+            tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
           }break;}
           case TK_NUM:{for(int i=0;i<substr_len;i++){
-            strncpy(tokens[nr_token].str, &e[position - substr_len], substr_len);
+            //int len=strlen(tokens[nr_token-1].str);
+            //memset(tokens[nr_token-1].str,0,len);
+            tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
           }break;}
           case TK_EQ:
           strcpy(tokens[nr_token].str, "==");break;

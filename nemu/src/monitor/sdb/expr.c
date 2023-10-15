@@ -190,7 +190,7 @@ u_int32_t eval(int p,int q) {
     }
   }
   else if (check_parentheses(p, q) == true) {
-    printf("1:p+1:%d,q-1:%d\n",p+1,q-1);
+   // printf("1:p+1:%d,q-1:%d\n",p+1,q-1);
     return eval(p + 1, q - 1);
   }
   else {

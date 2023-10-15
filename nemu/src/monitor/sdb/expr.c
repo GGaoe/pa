@@ -176,9 +176,9 @@ u_int32_t eval(int p,int q) {
    printf("ALL::p:%d,q:%d\n",p,q);
   u_int32_t val1,val2;
   if (p > q) {
-    printf("p:%d,q:%d\n,p.type:%d,q.type:%d",p,q,tokens[p].type,tokens[q].type);
-    printf("BAD Expression");
-    assert(p<=q);
+    //printf("p:%d,q:%d\n,p.type:%d,q.type:%d",p,q,tokens[p].type,tokens[q].type);
+    //printf("BAD Expression");
+    //assert(p<=q);
     return -1;
   }
   else if (p == q) {
@@ -190,7 +190,7 @@ u_int32_t eval(int p,int q) {
     }
   }
   else if (check_parentheses(p, q) == true) {
-    //printf("1:p+1:%d,q-1:%d\n",p+1,q-1);
+    printf("1:p+1:%d,q-1:%d\n",p+1,q-1);
     return eval(p + 1, q - 1);
   }
   else {

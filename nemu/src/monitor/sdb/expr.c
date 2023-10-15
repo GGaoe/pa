@@ -197,6 +197,7 @@ u_int32_t eval(int p,int q) {
     val1 = eval(p, op - 1);
    // printf("3:op+1:%d,q:%d\n",op+1,q);
     val2 = eval(op + 1, q);
+    printf("val1:%d val2:%d\n",val1,val2);
     switch (tokens[op].type) {
       case TK_ADD: return val1 + val2;
       case TK_SUB: return val1 - val2;
@@ -266,7 +267,7 @@ void init_exp(){
   for(int i=0;i<nr_token;i++){ // minus
     if((i>0&&tokens[i].type==TK_SUB&&tokens[i-1].type!=TK_NUM)||(i==0&&tokens[i].type==TK_SUB)){
       if(tokens[i+1].type==TK_SUB){
-        printf("1:MOther fuck!\n");
+       // printf("1:MOther fuck!\n");
         for(int j=i;j<nr_token-2;j++){
             tokens[j].type=tokens[j+2].type;
         }
@@ -274,7 +275,7 @@ void init_exp(){
         i--;
       }
       else if(tokens[i+1].type==TK_NUM){
-        printf("2:MOther fuck!\n");
+        //printf("2:MOther fuck!\n");
         for(int j=i;j<nr_token-1;j++){
             tokens[i]=tokens[i+1];
         }

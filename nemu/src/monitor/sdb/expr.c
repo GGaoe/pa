@@ -288,7 +288,14 @@ void init_exp(){
         tokens[i].str[0]='-';
         nr_token-=1;
       }
-
+      /*else if(tokens[i+1].type==TK_LEFT){
+        int count=1;
+        int j=i+2;
+        while(count!=0){
+            if(tokens[j].type==TK_LEFT)count++;
+            else if(tokens[j].type==TK_RIGHT)count--;
+        }
+      }*/
     }
   }
 

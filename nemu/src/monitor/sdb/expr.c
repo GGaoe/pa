@@ -325,7 +325,7 @@ void init_exp(){
         memset(tokens[i+2].str,'\0',len);
         tokens[i+2].str[0]='0';
         tokens[i+3].type=TK_SUB;
-        
+        nr_token+=4;
       }
     }
   }

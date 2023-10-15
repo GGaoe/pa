@@ -177,8 +177,8 @@ u_int32_t eval(int p,int q) {
   u_int32_t val1,val2;
   if (p > q) {
     //printf("p:%d,q:%d\n,p.type:%d,q.type:%d",p,q,tokens[p].type,tokens[q].type);
-    //printf("BAD Expression");
-    //assert(p<=q);
+    printf("BAD Expression");
+    assert(p<=q);
     return -1;
   }
   else if (p == q) {
@@ -279,7 +279,7 @@ void init_exp(){
       else if(tokens[i+1].type==TK_NUM){
         //printf("2:MOther fuck!\n");
         for(int j=i;j<nr_token-1;j++){
-            tokens[i]=tokens[i+1];
+            tokens[j]=tokens[j+1];
         }
         for(int j=31;j>0;j--){
           if(tokens[i].str[j-1]!='\0')

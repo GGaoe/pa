@@ -219,7 +219,7 @@ u_int32_t eval(int p,int q) {
       //printf("Mother fucker\n");
       //printf("%c\n",tokens[p].str[0]);
       //printf("%d\n",atoi(tokens[p].str));
-      return atoi(tokens[p].str);
+      return atoll(tokens[p].str);
     }
   }
   else if (check_parentheses(p, q) == true) {

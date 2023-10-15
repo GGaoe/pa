@@ -182,6 +182,7 @@ u_int32_t eval(int p,int q) {
   }
   else if (p == q) {
     if(tokens[p].type==TK_NUM){
+      printf("Mother fucker\n");
       //printf("%c\n",tokens[p].str[0]);
       //printf("%d\n",atoi(tokens[p].str));
       return atoi(tokens[p].str);

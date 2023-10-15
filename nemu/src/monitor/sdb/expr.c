@@ -231,7 +231,7 @@ u_int32_t eval(int p,int q) {
     bool flag_minus=0;
     op =The_main_op(p,q,&flag_minus);
     if(flag_minus)return -eval(op+1,q);
-    //printf("2:p:%d,op-1:%d\n",p,op-1);
+    printf("2:p:%d,op-1:%d\n",p,op-1);
     val1 = eval(p, op - 1);
    // printf("3:op+1:%d,q:%d\n",op+1,q);
     val2 = eval(op + 1, q);

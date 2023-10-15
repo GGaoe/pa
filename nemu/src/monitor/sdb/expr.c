@@ -175,7 +175,7 @@ u_int32_t eval(int p,int q) {
   int op;
   u_int32_t val1,val2;
   if (p > q) {
-    printf("p:%d,q:%d\n",p,q);
+    //printf("p:%d,q:%d\n",p,q);
     printf("BAD Expression");
     assert(p<=q);
     return -1;
@@ -188,11 +188,14 @@ u_int32_t eval(int p,int q) {
     }
   }
   else if (check_parentheses(p, q) == true) {
+    printf("1:p+1:%d,q-1:%d\n",p+1,q-1);
     return eval(p + 1, q - 1);
   }
   else {
     op =The_main_op(p,q);
+    printf("2:p:%d,op-1:%d\n",p,op-1);
     val1 = eval(p, op - 1);
+    printf("3:op+1:%d,q:%d\n",op+1,q);
     val2 = eval(op + 1, q);
     switch (tokens[op].type) {
       case TK_ADD: return val1 + val2;

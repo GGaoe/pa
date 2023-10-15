@@ -173,16 +173,17 @@ static int The_main_op(int p,int q){
 
 u_int32_t eval(int p,int q) {
   int op;
+   printf("ALL::p:%d,q:%d\n",p,q);
   u_int32_t val1,val2;
   if (p > q) {
-    //printf("p:%d,q:%d\n",p,q);
+    printf("p:%d,q:%d\n",p,q);
     printf("BAD Expression");
     assert(p<=q);
     return -1;
   }
   else if (p == q) {
     if(tokens[p].type==TK_NUM){
-      printf("Mother fucker\n");
+      //printf("Mother fucker\n");
       //printf("%c\n",tokens[p].str[0]);
       //printf("%d\n",atoi(tokens[p].str));
       return atoi(tokens[p].str);

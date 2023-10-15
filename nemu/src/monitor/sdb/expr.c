@@ -267,7 +267,8 @@ void init_exp(){
   }
 
   for(int i=0;i<nr_token;i++){ // minus
-    if((i>0&&tokens[i].type==TK_SUB&&tokens[i-1].type!=TK_NUM)||(i==0&&tokens[i].type==TK_SUB)){
+    if((i>0&&tokens[i].type==TK_SUB&&tokens[i-1].type!=TK_NUM&&tokens[i-1].type!=TK_RIGHT
+    )||(i==0&&tokens[i].type==TK_SUB)){
       if(tokens[i+1].type==TK_SUB){
        // printf("1:MOther fuck!\n");
         for(int j=i;j<nr_token-2;j++){

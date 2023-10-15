@@ -291,8 +291,9 @@ void init_exp(){
 	    int tmp = isa_reg_str2val(tokens[i].str, &flag1);
 	    if(flag1){
 		    int_to_char(tmp, tokens[i].str);
+        printf("%s",tokens[i].str);
        }
-       else assert(0);
+       //else assert(0);
        tokens[i].type=TK_NUM;
     }
 

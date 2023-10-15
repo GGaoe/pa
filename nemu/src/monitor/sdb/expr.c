@@ -140,7 +140,7 @@ static bool make_token(char *e) {
   return true;
 }
 
-static bool check_parentheses(int p,int  q){
+static bool check_parentheses(int p,int q){
   if(tokens[p].type!=TK_LEFT||tokens[q].type!=TK_RIGHT)return false;
   int count_left=0;
   int count_right=0;
@@ -152,8 +152,9 @@ static bool check_parentheses(int p,int  q){
   return false;
 }
 
-static int The_main_op(int p,int q){
+static int The_main_op(int p,int q,bool *flag_minus){
   int op=-1;
+  int tmp_p=p;
   while(p<q)
   {
     if(tokens[p].type==TK_NUM){
@@ -167,12 +168,36 @@ static int The_main_op(int p,int q){
       }
     }
     
-    else if(op==-1){op=p;}
-    else if(tokens[op].type==TK_MUL||tokens[op].type==TK_DIV){op=p;}
-    else if(tokens[p].type==TK_AND){op=p;}
-    else if((tokens[op].type!=TK_AND)&&(tokens[p].type==TK_EQ||tokens[p].type==TK_NOEQ)){op=p;}
+    else if(op==-1)
+    {op=p;
+    if(tokens[p].type==TK_SUB){
+      if(p==tmp_p||(p!=tmp_p&&(tokens[p-1].type!=TK_NUM||tokens[p-1].type!=TK_RIGHT)))*flag_minus=1;
+      else *flag_minus=0;
+      }
+    }
+    else if(tokens[op].type==TK_MUL||tokens[op].type==TK_DIV)
+    {
+      if(tokens[p].type==TK_SUB){
+        if(tokens[p-1].type==TK_NUM||tokens[p-1].type==TK_RIGHT){op=p;*flag_minus=0;}
+      }
+      else {op=p;*flag_minus=0;}
+    }
+    else if(tokens[p].type==TK_AND)
+    {op=p;*flag_minus=0;}
+    else if((tokens[op].type!=TK_AND)&&(tokens[p].type==TK_EQ||tokens[p].type==TK_NOEQ))
+    {op=p;*flag_minus=0;}
     else if((tokens[op].type!=TK_AND&&tokens[p].type!=TK_EQ&&tokens[p].type!=TK_NOEQ)
-           &&(tokens[p].type==TK_ADD||tokens[p].type==TK_SUB)){op=p;}
+           &&(tokens[p].type==TK_ADD||tokens[p].type==TK_SUB))
+    {
+      if(tokens[p].type==TK_ADD)op=p;
+      else {
+        if(tokens[p-1].type!=TK_NUM||tokens[p-1].type!=TK_RIGHT){
+          continue;
+        }
+        else
+        {op=p;*flag_minus=0;}
+        }
+    }
     p++;
   }
   return op;
@@ -202,7 +227,10 @@ u_int32_t eval(int p,int q) {
     return eval(p + 1, q - 1);
   }
   else {
-    op =The_main_op(p,q);
+    //changed for minus;
+    bool flag_minus=0;
+    op =The_main_op(p,q,&flag_minus);
+    if(flag_minus)return val2=-eval(op+1,q);
     //printf("2:p:%d,op-1:%d\n",p,op-1);
     val1 = eval(p, op - 1);
    // printf("3:op+1:%d,q:%d\n",op+1,q);

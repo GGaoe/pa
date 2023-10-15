@@ -297,7 +297,7 @@ void init_exp(){
         tokens[i].str[0]='-';
         nr_token-=1;
       }
-
+/*
       else if(tokens[i+1].type==TK_LEFT){
         if(i>0&&(tokens[i-1].type==TK_RIGHT||tokens[i-1].type==TK_NUM)){
             continue;
@@ -328,6 +328,7 @@ void init_exp(){
         tokens[i+3].type=TK_SUB;
         nr_token+=4;
       }
+      */
     }
   }
 

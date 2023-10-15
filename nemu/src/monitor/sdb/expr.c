@@ -319,6 +319,7 @@ void init_exp(){
         }
 
         }
+        tokens[i].type=TK_ADD;
         tokens[i+1].type=TK_LEFT;
         tokens[i+2].type=TK_NUM;
         int len=strlen(tokens[i+2].str);

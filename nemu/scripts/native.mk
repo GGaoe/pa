@@ -48,3 +48,15 @@ clean-tools: $(clean-tools)
 clean-all: clean distclean clean-tools
 
 .PHONY: run gdb run-env clean-tools clean-all $(clean-tools)
+
+count:
+
+				@echo "count lines"
+				@find . \( -name "*.c" -o -name "*.h" \) -exec cat {} + | grep -c '.*'
+
+countNoun:
+
+				@echo "count lines without space"
+				@find . \( -name "*.c" -o -name "*.h" \) -exec cat {} + | grep -cE '^.+$$'
+
+

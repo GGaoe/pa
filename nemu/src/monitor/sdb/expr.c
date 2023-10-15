@@ -106,9 +106,13 @@ static bool make_token(char *e) {
           case TK_REG:
           case TK_HEX:
           {for(int i=0;i<substr_len;i++){
+            int len=strlen(tokens[nr_token-1].str);
+            memset(tokens[nr_token-1].str,'\0',len);
             tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
           }break;}
           case TK_NUM:{for(int i=0;i<substr_len;i++){
+            int len=strlen(tokens[nr_token-1].str);
+            memset(tokens[nr_token-1].str,'\0',len);
             tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
           }break;}
           case TK_EQ:
@@ -290,7 +294,7 @@ void init_exp(){
         nr_token-=1;
       }
 
-      else if(tokens[i+1].type==TK_LEFT){
+      /*else if(tokens[i+1].type==TK_LEFT){
         if(i>0&&(tokens[i-1].type==TK_RIGHT||tokens[i-1].type==TK_NUM)){
             continue;
         }
@@ -318,7 +322,7 @@ void init_exp(){
         tokens[i+2].str[0]='0';
         tokens[i+3].type=TK_SUB;
         
-      }
+      }*/
     }
   }
 

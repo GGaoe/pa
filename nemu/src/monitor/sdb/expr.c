@@ -287,30 +287,6 @@ void init_exp(){
 
     }
   }
-   for(int i=0;i<nr_token;i++){ // minus*2
-    if((i>0&&tokens[i].type==TK_SUB&&tokens[i-1].type!=TK_NUM)||(i==0&&tokens[i].type==TK_SUB)){
-      if(tokens[i+1].type==TK_SUB){
-        for(int j=i;j<nr_token-2;j++){
-            tokens[i]=tokens[i+2];
-        }
-        nr_token-=2;
-        i--;
-      }
-      else if(tokens[i+1].type==TK_NUM){
-        //printf("MOther fuck!\n");
-        for(int j=i;j<nr_token-1;j++){
-            tokens[i]=tokens[i+1];
-        }
-        for(int j=31;j>0;j--){
-          if(tokens[i].str[j-1]!='\0')
-          tokens[i].str[j]=tokens[i].str[j-1];
-        }
-        tokens[i].str[0]='-';
-        nr_token-=1;
-      }
-
-    }
-  }
 
   return;
 } 

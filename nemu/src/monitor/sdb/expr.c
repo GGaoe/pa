@@ -267,7 +267,7 @@ void init_exp(){
         nr_token-=2;
         i--;
       }
-      else{
+      else if(tokens[i+1].type==TK_NUM){
         for(int j=i;j<nr_token-1;j++){
             tokens[i]=tokens[i+1];
         }

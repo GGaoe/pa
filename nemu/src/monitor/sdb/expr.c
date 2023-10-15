@@ -301,7 +301,7 @@ void init_exp(){
   for(int i=0;i<nr_token;i++){
     if(tokens[i].type==TK_REG){//reg
       bool flag1 = 0;
-	    long int tmp = isa_reg_str2val(tokens[i].str, &flag1);
+	    u_int32_t tmp = isa_reg_str2val(tokens[i].str, &flag1);
 	    if(flag1){
         //printf("%d\n",tmp);
 		    int_to_char(tmp, tokens[i].str);

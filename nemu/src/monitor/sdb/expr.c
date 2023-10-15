@@ -293,7 +293,7 @@ void init_exp(){
 		    int_to_char(tmp, tokens[i].str);
         //printf("%s",tokens[i].str);
        }
-      //else assert(0);
+      else assert(0);
        tokens[i].type=TK_NUM;
     }
 

@@ -75,8 +75,10 @@ typedef struct token {
   char str[32];
 } Token;
 
+
 static Token tokens[32] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
+
 
 int position = 0;//changed
 
@@ -109,11 +111,13 @@ static bool make_token(char *e) {
             //int len=strlen(tokens[nr_token-1].str);
             //memset(tokens[nr_token-1].str,0,len);
             tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
+            strncpy(tokens[nr_token].str, &e[position - substr_len], substr_len);
           }break;}
           case TK_NUM:{for(int i=0;i<substr_len;i++){
             //int len=strlen(tokens[nr_token-1].str);
             //memset(tokens[nr_token-1].str,0,len);
             tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
+            strncpy(tokens[nr_token].str, &e[position - substr_len], substr_len);
           }break;}
           case TK_EQ:
           strcpy(tokens[nr_token].str, "==");break;
@@ -330,6 +334,11 @@ void init_exp(){
 } 
 
 word_t expr(char *e, bool *success) {
+  nr_token = 0;
+  for(int i=0;i<32;i++){
+    int len=strlen(tokens[i].str);
+  memset(tokens[i].str,'\0',len);
+  }
   position=0;
   if (!make_token(e)) {
     *success = false;

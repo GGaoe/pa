@@ -171,7 +171,7 @@ static int The_main_op(int p,int q,bool *flag_minus){
     else if(op==-1)
     {op=p;
     if(tokens[p].type==TK_SUB){
-      if(p==tmp_p||(p!=tmp_p&&(tokens[p-1].type!=TK_NUM||tokens[p-1].type!=TK_RIGHT)))*flag_minus=1;
+      if(p==tmp_p||(p!=tmp_p&&(tokens[p-1].type!=TK_NUM&&tokens[p-1].type!=TK_RIGHT)))*flag_minus=1;
       else *flag_minus=0;
       }
     }

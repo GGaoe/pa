@@ -107,10 +107,10 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
           case TK_REG:
           case TK_HEX:
-          {for(int i=0;i<substr_len;i++){
+          {for(int i=0;i<substr_len-1;i++){
             //int len=strlen(tokens[nr_token-1].str);
             //memset(tokens[nr_token-1].str,0,len);
-            tokens[nr_token-1].str[i]=*(substr_start+i);//Decimal System
+            tokens[nr_token-1].str[i]=*(substr_start+i+1);//Decimal System
             strncpy(tokens[nr_token].str, &e[position - substr_len], substr_len);
           }break;}
           case TK_NUM:{for(int i=0;i<substr_len;i++){
@@ -291,9 +291,9 @@ void init_exp(){
 	    int tmp = isa_reg_str2val(tokens[i].str, &flag1);
 	    if(flag1){
 		    int_to_char(tmp, tokens[i].str);
-        printf("%s",tokens[i].str);
+        //printf("%s",tokens[i].str);
        }
-      else assert(0);
+      //else assert(0);
        tokens[i].type=TK_NUM;
     }
 

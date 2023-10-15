@@ -303,7 +303,7 @@ void init_exp(){
       bool flag1 = 0;
 	    u_int32_t tmp = isa_reg_str2val(tokens[i].str, &flag1);
 	    if(flag1){
-        //printf("%d\n",tmp);
+        printf("%d\n",tmp);
 		    int_to_char(tmp, tokens[i].str);
         //printf("str:%s\ns",tokens[i].str);
        }

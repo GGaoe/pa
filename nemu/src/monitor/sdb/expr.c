@@ -268,16 +268,10 @@ void init_exp(){
       if(tokens[i+1].type==TK_SUB){
         printf("1:MOther fuck!\n");
         for(int j=i;j<nr_token-2;j++){
-           // tokens[i].str=tokens[i+2].str;
-
-            tokens[i].type=tokens[i+2].type;
+            tokens[j].type=tokens[j+2].type;
         }
         nr_token-=2;
         i--;
-         for(int j=0;j<nr_token;j++){
-          printf("%d:%d  ",j,tokens[j].type);
-        }
-        printf("here\n");
       }
       else if(tokens[i+1].type==TK_NUM){
         printf("2:MOther fuck!\n");

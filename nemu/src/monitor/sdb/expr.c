@@ -76,7 +76,7 @@ typedef struct token {
 } Token;
 
 
-static Token tokens[32] __attribute__((used)) = {};
+static Token tokens[1000] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 
@@ -381,7 +381,7 @@ void init_exp(){
 
 word_t expr(char *e, bool *success) {
   nr_token = 0;
-  for(int i=0;i<32;i++){
+  for(int i=0;i<999;i++){
     int len=strlen(tokens[i].str);
   memset(tokens[i].str,'\0',len);
   }

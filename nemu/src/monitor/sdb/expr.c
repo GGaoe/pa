@@ -270,6 +270,7 @@ void init_exp(){
         for(int j=0;j<nr_token;j++){
           printf("%d:%d  ",j,tokens[j].type);
         }
+        printf("here\n");
         for(int j=i;j<nr_token-2;j++){
             tokens[i]=tokens[i+2];
         }

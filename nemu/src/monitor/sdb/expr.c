@@ -173,7 +173,7 @@ static int The_main_op(int p,int q){
 
 u_int32_t eval(int p,int q) {
   int op;
-   printf("ALL::p:%d,q:%d\n",p,q);
+   //printf("ALL::p:%d,q:%d\n",p,q);
   u_int32_t val1,val2;
   if (p > q) {
     //printf("p:%d,q:%d\n,p.type:%d,q.type:%d",p,q,tokens[p].type,tokens[q].type);
@@ -199,7 +199,7 @@ u_int32_t eval(int p,int q) {
     val1 = eval(p, op - 1);
    // printf("3:op+1:%d,q:%d\n",op+1,q);
     val2 = eval(op + 1, q);
-    printf("val1:%d val2:%d\n",val1,val2);
+    //printf("val1:%d val2:%d\n",val1,val2);
     switch (tokens[op].type) {
       case TK_ADD: return val1 + val2;
       case TK_SUB: return val1 - val2;

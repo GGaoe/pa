@@ -260,6 +260,7 @@ void int_to_char(int n,char x[]){
   memset(x,'\0',len);
   char a[32]="";
   int length=0;
+  if(n>=0){
   while(n!=0){
     int p=n%10;
     n/=10;
@@ -268,6 +269,18 @@ void int_to_char(int n,char x[]){
   }
   for(int i=0;i<length;i++){
     x[i]=a[length-i-1];
+  }}
+  else {
+while(n!=0){
+    int p=n%10;
+    p=-p;
+    n/=10;
+    a[length]=p+'0';
+    length++;
+  }
+  for(int i=0;i<length;i++){
+    x[i+1]=a[length-i-1];
+  }x[0]='-';
   }
   return;
 }

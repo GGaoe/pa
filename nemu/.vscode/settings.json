@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "reg.h": "c",
+        "readline.h": "c",
+        "history.h": "c",
+        "regex.h": "c",
+        "atomic": "c",
+        "*.tcc": "c",
+        "bitset": "c",
+        "memory_resource": "c",
+        "tuple": "c",
+        "*.def": "c",
+        "sdb.h": "c"
+    }
+}

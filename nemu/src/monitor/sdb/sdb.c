@@ -18,11 +18,15 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
+#include <memory/paddr.h>
 
 static int is_batch_mode = false;
 
 void init_regex();
 void init_wp_pool();
+void new_wp(char *args);
+//void free_wp(int n);
+//void display_wp(void);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -47,9 +51,75 @@ static int cmd_c(char *args) {
   return 0;
 }
 
-
 static int cmd_q(char *args) {
+  nemu_state.state = NEMU_QUIT;
   return -1;
+}
+
+static int cmd_si(char *args){
+  char *expression=strtok(NULL," ");
+  uint64_t n=1;
+  if(expression!=NULL){
+    n=atoll(expression);
+  }
+  cpu_exec(n);
+  return 0;
+}
+
+static int cmd_info(char *args){
+  char *expression=strtok(NULL," ");
+  if(expression==NULL)return -1;
+  if(expression[0]=='r'){
+    isa_reg_display();
+  }
+  if(expression[0]=='w'){
+    //display_wp();
+  }
+  return 0;
+}
+
+static int cmd_x(char *args){
+  char *expression=strtok(NULL," ");
+  char *expression1=strtok(NULL," ");
+  long int num;
+  uint64_t addr;
+  sscanf(expression,"%ld",&num);
+  sscanf(expression1,"%lx",&addr);
+  int step=num>0 ? 4 : -4;
+  num=num>0?num:-num;
+  uint64_t N_T=0;
+  for(;num>0;num--){
+    printf("%10lx:   ",addr+N_T*step);
+    printf("0x%-10x\n",paddr_read(addr+N_T*step,4));
+    N_T++;
+  }
+  return 0;
+}
+
+static int cmd_p(char *args){
+  bool flag=false;
+  char *expression=strtok(NULL,"");
+  expr(expression,&flag);
+  if(!flag){
+    printf("%s","WRONG!");
+    assert(0);
+  }
+  return 0;
+}
+
+static int cmd_w(char *args){
+  //char *expression=strtok(NULL,"");
+  //new_wp(expression);
+  //
+  return 0;
+}
+
+static int cmd_d(char *args){
+  //int n;
+  //char *expression=strtok(NULL,"");
+  //sscanf(expression,"%d",&n);
+  //free_wp(n);
+  return 0;
 }
 
 static int cmd_help(char *args);
@@ -62,7 +132,12 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
+  {"si","Single step work",cmd_si},
+  {"info","information",cmd_info},
+  {"x","Xray",cmd_x},
+  {"p","Program",cmd_p},
+  {"w","set watchpoint",cmd_w},
+  {"d","delete watchpoint",cmd_d},
   /* TODO: Add more commands */
 
 };

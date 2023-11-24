@@ -35,7 +35,7 @@ int sprintf(char *out, const char *fmt, ...) {
 int snprintf(char *out, size_t n, const char *fmt, ...) {
   panic("Not implemented");
 }
-
+static char x_num[]="0123456789ABCDEF";
 int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
   char *out1=out;
   const char *format=fmt;
@@ -65,6 +65,30 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
           while(num!=0){
             buf[len++]=num%10+'0';
             num=num/10;
+          }
+         
+          for(int i=0;i<len;i++){
+            buf_n[len-i-1]=buf[i];
+          }
+          for(int i=0;i<len;i++){
+            *out1++=buf_n[i];
+          }
+          break;
+          }
+
+        case 'x':{
+          int num=va_arg(ap,int);
+          if(num<0){
+            *out1++='-';
+            num=-num;
+          }
+          if(num==0)*out1++='0';
+          char buf[300];
+          char buf_n[300];
+          int len=0;
+          while(num!=0){
+            buf[len++]=x_num[num%16];;
+            num=num/16;
           }
          
           for(int i=0;i<len;i++){

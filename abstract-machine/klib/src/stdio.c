@@ -20,11 +20,7 @@ int printf(const char *fmt, ...) {
 int vsprintf(char *out, const char *fmt, va_list ap) {
   panic("Not implemented");
 }
-/*
-int sprintf(char *out, const char *fmt, ...) {
- 
-}
-*/
+
 
 int sprintf(char *out, const char *fmt, ...) {
   va_list args;
@@ -85,7 +81,7 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
           *out1++=c;
           break;
         }
-        
+
         case '\n':{
           *out1++='\n';
           break;

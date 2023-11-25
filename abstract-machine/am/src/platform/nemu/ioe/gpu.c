@@ -24,6 +24,20 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 }
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
+  int x=ctl->x;
+  int y=ctl->y;
+  int w=ctl->w;
+  int h=ctl->h;
+  uint32_t tmp=inl(VGACTL_ADDR);
+  //uint32_t vga_h=(tmp & 0x0000ffff);
+  uint32_t vga_w=((tmp & 0xffff0000)>>16);
+  uint32_t *dst=(uint32_t *)(uintptr_t)FB_ADDR;
+  uint32_t *p=ctl->pixels;
+  for(int i=0;i<h;i++){
+    for(int j=0;j<w;j++){
+      dst[vga_w*(i+y)+(j+x)]=p[w*i+j];
+    }
+  }
   if (ctl->sync) {
     outl(SYNC_ADDR, 1);
   }

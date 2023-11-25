@@ -7,6 +7,8 @@ void __am_gpu_init() {
   int i;
   AM_GPU_CONFIG_T info = io_read(AM_GPU_CONFIG);
   int w = info.width, h = info.height;
+  //w=VGACTL_ADDR
+  //w=vgactl_port_base[0]>>32;
   uint32_t *fb=(uint32_t *)(uintptr_t)FB_ADDR;
   for(i=0;i<w*h;i++)fb[i]=i;
   outl(SYNC_ADDR,1);

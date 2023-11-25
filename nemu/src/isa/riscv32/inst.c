@@ -32,10 +32,10 @@ enum {
 #define immI() do { *imm = SEXT(BITS(i, 31, 20), 12); } while(0)
 #define immU() do { *imm = SEXT(BITS(i, 31, 12), 20) << 12; } while(0)
 #define immS() do { *imm = (SEXT(BITS(i, 31, 25), 7) << 5) | BITS(i, 11, 7); } while(0)
-//#define immJ() do { *imm = (SEXT(BITS(i,31,31),1)<<20) | BITS(i,30,21)<<1 | BITS(i,20,20)<<11 | BITS(i,19,12)<<12;}while(0)//
-//#define immB() do { *imm = (SEXT(BITS(i,31,31),1)<<12)  | BITS(i,30,25)<<5  | BITS(i,11,8)<<1  | BITS(i,7,7)<<11;}while(0)//
-#define immJ() do { *imm = SEXT(BITS(i, 31, 31), 1) << 19 | ((SEXT(BITS(i, 19, 12), 8) << 56) >> 56) << 11 | ((SEXT(BITS(i, 20, 20), 1) << 63) >> 63) << 10 | (((SEXT(BITS(i, 30, 21), 10) << 54) >> 54) << 22) >> 22; *imm = *imm << 1; } while (0)
-#define immB() do { *imm = SEXT(BITS(i, 31, 31), 1) << 11 | ((SEXT(BITS(i, 7, 7), 1) << 63) >> 63) << 10 | ((SEXT(BITS(i, 30, 25), 6) << 58) >> 58) << 4 | ((SEXT(BITS(i, 11, 8), 4) << 60) >> 60); *imm = *imm << 1; } while (0)
+#define immJ() do { *imm = (SEXT(BITS(i,31,31),1)<<20) | BITS(i,30,21)<<1 | BITS(i,20,20)<<11 | BITS(i,19,12)<<12;}while(0)//
+#define immB() do { *imm = (SEXT(BITS(i,31,31),1)<<12)  | BITS(i,30,25)<<5  | BITS(i,11,8)<<1  | BITS(i,7,7)<<11;}while(0)//
+//#define immJ() do { *imm = SEXT(BITS(i, 31, 31), 1) << 19 | ((SEXT(BITS(i, 19, 12), 8) << 56) >> 56) << 11 | ((SEXT(BITS(i, 20, 20), 1) << 63) >> 63) << 10 | (((SEXT(BITS(i, 30, 21), 10) << 54) >> 54) << 22) >> 22; *imm = *imm << 1; } while (0)
+//#define immB() do { *imm = SEXT(BITS(i, 31, 31), 1) << 11 | ((SEXT(BITS(i, 7, 7), 1) << 63) >> 63) << 10 | ((SEXT(BITS(i, 30, 25), 6) << 58) >> 58) << 4 | ((SEXT(BITS(i, 11, 8), 4) << 60) >> 60); *imm = *imm << 1; } while (0)
 
 
 static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_t *imm, int type) {
@@ -88,7 +88,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000001 ????? ????? 110 ????? 01100 11", rem    , R, R(rd)=(int32_t)src1%(int32_t)src2);
   INSTPAT("0000001 ????? ????? 111 ????? 01100 11", remu   , R, R(rd)=src1%src2);
   INSTPAT("0000001 ????? ????? 001 ????? 01100 11", mulh   , R, int32_t a=src1;int32_t b=src2;int64_t tmp=(int64_t)a*(int64_t)b;R(rd)=BITS(tmp,63,32));
-  INSTPAT("0000001 ????? ????? 010 ????? 01100 11", mulhu  , R, uint64_t tmp=(uint64_t)src1*(uint64_t)src2;R(rd)=BITS(tmp,63,32));
+  INSTPAT("0000001 ????? ????? 011 ????? 01100 11", mulhu  , R, uint64_t tmp=(uint64_t)src1*(uint64_t)src2;R(rd)=BITS(tmp,63,32));
  
  
 

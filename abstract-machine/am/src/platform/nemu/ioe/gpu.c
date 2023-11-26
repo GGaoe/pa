@@ -4,12 +4,14 @@
 #define SYNC_ADDR (VGACTL_ADDR + 4)
 
 void __am_gpu_init() {
+  
   int i;
   AM_GPU_CONFIG_T info = io_read(AM_GPU_CONFIG);
   int w = info.width, h = info.height;
   uint32_t *fb=(uint32_t *)(uintptr_t)FB_ADDR;
   for(i=0;i<w*h;i++)fb[i]=i;
   outl(SYNC_ADDR,1);
+  
 }
 
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
@@ -38,6 +40,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
       dst[vga_w*(i+y)+(j+x)]=p[w*i+j];
     }
   }
+  
   if (ctl->sync) {
     outl(SYNC_ADDR, 1);
   }

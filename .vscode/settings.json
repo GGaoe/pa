@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "am.h": "c",
+        "setjmp.h": "c",
+        "stddef.h": "c"
+    }
+}
